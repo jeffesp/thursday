@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Today is Thursday - Code</title><link href="https://www.todayisthursday.net/" rel="alternate"></link><link href="https://www.todayisthursday.net/feeds/code.atom.xml" rel="self"></link><id>https://www.todayisthursday.net/</id><updated>2019-06-18T00:00:00-04:00</updated><entry><title>World's simplest database migration utility</title><link href="https://www.todayisthursday.net/simple-sqlite-db-migration.html" rel="alternate"></link><published>2019-06-18T00:00:00-04:00</published><updated>2019-06-18T00:00:00-04:00</updated><author><name>Jeff Esp</name></author><id>tag:www.todayisthursday.net,2019-06-18:/simple-sqlite-db-migration.html</id><summary type="html">&lt;p&gt;A simple SQLite migration script written in Python&lt;/p&gt;</summary><content type="html">&lt;p&gt;I had to write a migration for a SQLite database the other day, and decided
+to do some yak-shaving and write the world's simplest db migration utility.
+It only migrates one direction, and you have to write migration scripts by
+hand. But it seems to work, so here it is.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The &lt;code&gt;PRAGMA&lt;/code&gt; stuff could be replaced by a table that keeps track of what the
+version, or has a list of the scripts applied. For now, &lt;code&gt;user_version&lt;/code&gt; is
+going to work fine.&lt;/p&gt;</content></entry></feed>
