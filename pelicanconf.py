@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 AUTHOR = 'Jeff Esp'
 SITENAME = 'Today is Thursday'
 SITEURL = 'https://www.todayisthursday.net'
+RELATIVE_URLS = True
 
 PATH = 'content'
 
