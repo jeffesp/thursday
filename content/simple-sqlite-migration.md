@@ -1,5 +1,5 @@
 Title: World's simplest database migration utility
-Category: Python
+Category: Code
 Date: 2019-06-18
 Slug: simple-sqlite-db-migration
 Authors: Jeff Esp
