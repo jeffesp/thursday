@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <header>
+        <h1>{{ title }}</h1>
+        <p>Posted: {{ post_date }}</p>
+    </header>
+    <article>
+        {{ post_body | safe }}
+    </article>
+</section>
+{% endblock %}
