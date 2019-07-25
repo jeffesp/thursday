@@ -3,7 +3,7 @@
 <section>
     <header>
         <h1>{{ title }}</h1>
-        <p>Posted: {{ post_date }}</p>
+        <p>Posted: {{ post_date.strftime('%Y-%m-%d') }}</p>
     </header>
     <article>
         {{ post_body | safe }}

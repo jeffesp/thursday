@@ -4,6 +4,7 @@ import markdown
 import urllib
 from markdown.extensions.codehilite import CodeHiliteExtension
 from jinja2 import Template, Environment, FileSystemLoader, select_autoescape
+from slugify import slugify
 
 
 class SiteContext(object):
@@ -20,10 +21,11 @@ class PostContext(object):
         return os.path.join(str(self.date.year), str(self.date.month), str(self.date.day), self.url_safe_title())
 
     def url_safe_title(self):
-        pass
+        return slugify(self.title) + ".html"
 
     def post_link_path(self):
-        pass
+        # for now this should work
+        return self.local_path()
 
 
 class Thursday(object):
@@ -41,7 +43,8 @@ class Thursday(object):
     def render_post(self, in_file, template, out_file):
         try:
             html = self.md.convert(in_file.read())
-            print(template.render(post_body=html, title=self.md.Meta['title'][0], post_date=self.md.Meta['date'][0]))
+            pc = PostContext(self.md.Meta['title'][0], self.md.Meta['date'][0], html)
+            print(template.render(post_body=pc.content, title=pc.title, post_date=pc.date))
         finally:
             self.md.reset()
 
