@@ -1,43 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-        <meta charset="utf-8" />
-        <title>Simple SQLite Database Migration</title>
-        <link rel="stylesheet" href="./theme/css/main.css" />
-        <link href="https://www.todayisthursday.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Today is Thursday Atom Feed" />
+    <meta charset="utf-8" />
+    <link href="/static/styles.css" rel="stylesheet" />
+    <title>Simple SQLite Database Migration</title>
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="./">Today is Thursday </a></h1>
-                <nav><ul>
-                    <li class="active"><a href="./category/code.html">Code</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-<section id="content" class="body">
-  <article>
+<body>
+    <main>
+        
+<section>
     <header>
-      <h1 class="entry-title">
-        <a href="./simple-sqlite-db-migration.html" rel="bookmark"
-           title="Permalink to Simple SQLite Database Migration">Simple SQLite Database Migration</a></h1>
+        <h1>Simple SQLite Database Migration</h1>
+        <p>Posted: 2019-06-18</p>
     </header>
-
-    <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2019-06-18T00:00:00-04:00">
-                Published: Tue 18 June 2019
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="./author/jeff-esp.html">Jeff Esp</a>
-        </address>
-<p>In <a href="./category/code.html">Code</a>.</p>
-
-</footer><!-- /.post-info -->      <p>I had to write a migration for a SQLite database the other day, and decided
-to do some yak-shaving and write the world's simplest db migration utility.
+    <article>
+        <p>I had to write a migration for a SQLite database the other day, and decided
+to do some <a href="https://en.wiktionary.org/wiki/yak_shaving">yak shaving</a> and write the world's simplest db migration utility.
 It only migrates one direction, and you have to write migration scripts by
 hand. But it seems to work, so here it is.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="k">def</span> <span class="nf">migrate_schema</span><span class="p">():</span>
@@ -75,27 +57,13 @@ far. </p>
 <p>The <code>PRAGMA</code> stuff could be replaced by a table that keeps track of what the
 version, or even has a list of the scripts applied and some tracking data 
 about that. For now, <code>user_version</code> is going to work fine.</p>
-    </div><!-- /.entry-content -->
-
-  </article>
+    </article>
 </section>
-        <section id="extras" class="body">
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="https://www.todayisthursday.net/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
-
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
-
+    </main>
+    <aside>
+        Something Here
+    </aside>
 </body>
+
 </html>
