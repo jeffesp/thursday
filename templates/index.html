@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
+<section>
 <ul>
 {% for post in posts %}
     <li><a href="{{post.post_link_path()}}">{{post.title}}</a></li>
 {% endfor %}
 </ul>
+</section>
 {% endblock %}
