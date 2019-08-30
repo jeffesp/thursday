@@ -1,18 +1,30 @@
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <link href="/static/styles.css" rel="stylesheet" />
     <title>{{ title }}</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <main>
-        {% block content %}{% endblock %}
+      {% block content %}{% endblock %}
     </main>
     <aside>
-        Something Here
+      <section>
+        <h1>Today is Thursday</h1>
+        <h3 id="subtitle"></h3>
+      </section>
     </aside>
-</body>
+  </body>
 
+  <script type="text/javascript" src="/static/site.js"></script>
+  <script type="text/javascript">
+    document.addEventListener(
+      "DOMContentLoaded",
+      function() {
+        subtitle();
+      },
+      false
+    );
+  </script>
 </html>

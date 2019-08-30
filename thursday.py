@@ -42,6 +42,8 @@ class Thursday(object):
             autoescape=select_autoescape(['html', 'xml'])
         )
 
+        self.source_files = os.listdir(self.source_path)
+
         self.rendered_posts = []
 
         if os.path.exists(self.output_path):
@@ -67,9 +69,8 @@ class Thursday(object):
 
     def write_posts(self):
         template = self.get_post_template(self.template_path)
-        files = os.listdir(self.source_path)
         # TODO: probably need to run through first, rather than render as I go 
-        for f in files:
+        for f in self.source_files:
             with open(os.path.join(self.source_path, f)) as input_file:
                 self.render_post(input_file, template)
 
