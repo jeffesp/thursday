@@ -2,10 +2,13 @@
 {% block content %}
 <section>
     <header>
-        <h1>{{ title }}</h1>
+        <h2>{{ title }}</h2>
     </header>
     <article>
         {{ post_body | safe }}
     </article>
+    <footer>
+        <a href="index.html">Return to main</a>
+    </footer>
 </section>
 {% endblock %}

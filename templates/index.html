@@ -1,12 +1,99 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+
+{% block page_style %}
+<style>
+  ul {
+    margin: 0 0 15px 0;
+    padding: 0;
+  }
+
+  li {
+  }
+
+  li:nth-child(5n) {
+    margin-bottom: 15px;
+  }
+
+  #search {
+    display: none;
+  }
+
+  #search-result {
+    display: none;
+    position: absolute;
+    min-height: 30px;
+    padding: 10px;
+    border: 2px solid var(--border);
+    background-color: var(--background-alt);
+  }
+</style>
+{% endblock %}
+{% block content %}
 <section>
-  <h1>Posts</h1>
-  <ul>
-    {% for post in posts %}
-    <li>
-      <a href="{{ post.post_link_path() }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-  </ul>
+  <header>
+    <h1 id="top">Fourth Street Songbook</h1>
+  </header>
+  <article>
+    <div>
+      <input type="search" id="search" name="search" placeholder="Enter song name or number" />
+    </div>
+    <ol id="list">
+      {% for post in posts %}
+      <li data-search="{{ post.search_data() }}">
+        <a href="{{ post.post_link_path() }}">{{ post.title }}</a>
+      </li>
+      {% endfor %}
+    </ol>
+    <div id="search-result">
+      <ul>
+        <li>None</li>
+      </ul>
+    </div>
+  </article>
+  <footer>
+    <a href="#top">Back to top </a>
+  </footer>
 </section>
+{% endblock %}
+
+{% block page_script %}
+<script type="text/javascript">
+  const songs = Array.from(document.querySelectorAll('#list li'));
+  const search_result = document.getElementById('search-result');
+  const none_element = document.createElement('li');
+  none_element.appendChild(document.createTextNode('None'));
+  function run_search(term) {
+    return (
+      songs
+        .reduce((res, current) => {
+          // if we match add a copy of the li + a (deep clone) to the list
+          if (current.dataset.search.toLowerCase().includes(term.toLowerCase())) {
+            res.push(current.cloneNode(true));
+          }
+          return res;
+        }, [])
+    );
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    const search = document.getElementById('search')
+    const filter_items = function(ev) {
+      if (ev.target.value.length > 1) {
+        search_result.firstElementChild.replaceChildren(...run_search(ev.target.value));
+      }
+    }
+    search.addEventListener('focus', (ev) => {
+      const pos = ev.target.getBoundingClientRect();
+      search_result.style.display = 'block';
+      search_result.style.top = `${pos.bottom}px`;
+      search_result.style.left = `${pos.left}px`;
+      search_result.style.width = `${pos.width - 20}px`; // 20 is left+right padding on input element
+    });
+    search.addEventListener('focus', filter_items);
+    search.addEventListener('blur', (ev) => {
+      search_result.style.display = 'none';
+      search_result.firstElementChild.replaceChildren(none_element);
+    });
+    search.addEventListener('input', filter_items);
+  });
+</script>
 {% endblock %}

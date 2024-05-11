@@ -8,8 +8,9 @@ from slugify import slugify
 
 
 class SongContext(object):
-    def __init__(self, base_dir, title, date, content):
+    def __init__(self, base_dir, number, title, date, content):
         self.base_dir = base_dir
+        self.number = number
         self.title = title
         self.date = datetime.strptime(date, '%Y-%m-%d')
         self.content = content
@@ -18,10 +19,13 @@ class SongContext(object):
         return os.path.join(self.base_dir, self.url_safe_title())
 
     def url_safe_title(self):
-        return slugify(self.title) + ".html"
+        return f'{self.number}-{slugify(self.title, to_lower=True)}.html'
 
     def post_link_path(self):
-        return f'/{self.url_safe_title()}'
+        return f'{self.url_safe_title()}'
+    
+    def search_data(self):
+        return f'{self.number}:{self.title}'
 
     def create_song_directory(self):
         os.makedirs(os.path.dirname(self.local_path()), mode=0o755, exist_ok=True)
@@ -51,9 +55,9 @@ class Songbook(object):
             for f in os.listdir(self.static_path):
                 shutil.copy2(os.path.join(self.static_path, f), os.path.normpath(os.path.join(self.output_path , self.static_path, f)))
 
-    def render_song(self, in_file, template):
+    def render_song(self, number, name, in_file, template):
         html = in_file.read()
-        ctx = SongContext(self.output_path, self.md.Meta['title'][0], self.md.Meta['date'][0], html)
+        ctx = SongContext(self.output_path, number, name, '2024-01-01', html)
 
         ctx.create_song_directory()
         with open(ctx.local_path(), "w") as f:
@@ -66,7 +70,10 @@ class Songbook(object):
         # TODO: probably need to run through first, rather than render as I go 
         for f in self.source_files:
             with open(os.path.join(self.source_path, f)) as input_file:
-                self.render_song(input_file, template)
+                name = os.path.basename(f).split('.')[0]
+                number = name.split('_')[0]
+                name = ' '.join([w.title() for w in name.split('_')][1:])
+                self.render_song(number, name, input_file, template)
 
     def write_index(self):
         template = self.get_template(self.template_path, 'index.html')
