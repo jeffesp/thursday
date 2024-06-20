@@ -1,6 +1,8 @@
 from datetime import datetime
 import os
+from pathlib import Path
 import shutil
+import sys
 import urllib
 
 from jinja2 import Template, Environment, FileSystemLoader, select_autoescape
@@ -32,10 +34,10 @@ class SongContext(object):
 
 
 class Songbook(object):
-    def __init__(self):
-        self.source_path='./content'
+    def __init__(self, source_path: str | None = None):
+        self.source_path= source_path or'./content'
         self.template_path='./templates'
-        self.output_path='./output'
+        self.output_path='./output' if not source_path else f'./output/{Path(source_path).name}'
         self.static_path='./static'
 
         self.jinja_env = Environment(
@@ -85,6 +87,9 @@ class Songbook(object):
 
 
 if __name__ == "__main__":
-    th = Songbook()
+    dir = None
+    if len(sys.argv) > 1:
+        dir = sys.argv[1]
+    th = Songbook(dir)
     th.write_songs()
     th.write_index()
