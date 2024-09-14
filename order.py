@@ -14,7 +14,7 @@ def order(dir):
 
     for f in zip(files, range(1, len(source_files))):
         shutil.copy2(Path(f[0][0]), Path(os.path.join('./renamed', f'{f[1]:02d}_{f[0][1]}')))
-        
+
 
 if __name__ == "__main__":
     order(sys.argv[1])
