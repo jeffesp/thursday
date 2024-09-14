@@ -34,7 +34,7 @@ class SongContext(object):
 
 
 class Songbook(object):
-    def __init__(self, source_path: str | None = None):
+    def __init__(self, source_path):
         self.source_path= source_path or'./content'
         self.template_path='./templates'
         self.output_path='./output' if not source_path else f'./output/{Path(source_path).name}'
@@ -45,7 +45,7 @@ class Songbook(object):
             autoescape=select_autoescape(['html', 'xml'])
         )
 
-        self.source_files = os.listdir(self.source_path)
+        self.source_files = sorted([f for f in os.listdir(self.source_path) if f.endswith("html")])
 
         self.rendered_posts = []
 
@@ -71,6 +71,7 @@ class Songbook(object):
         template = self.get_template(self.template_path, file='song.html')
         # TODO: probably need to run through first, rather than render as I go 
         for f in self.source_files:
+            print(f"processing {f}")
             with open(os.path.join(self.source_path, f)) as input_file:
                 name = os.path.basename(f).split('.')[0]
                 number = name.split('_')[0]
