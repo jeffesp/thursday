@@ -12,7 +12,7 @@ def order(dir):
 
     os.mkdir('./renamed')
 
-    for f in zip(files, range(1, len(source_files))):
+    for f in zip(files, range(1, len(source_files)+1)):
         shutil.copy2(Path(f[0][0]), Path(os.path.join('./renamed', f'{f[1]:02d}_{f[0][1]}')))
 
 
